@@ -17,4 +17,13 @@ public class GraphReader {
 
     }
 
+    public static void removeEdges(ArrayList<ArrayList<Integer>> adj, ArrayList<int[]> feasible_labellings_for_covid) {
+        for (int[] arr : feasible_labellings_for_covid) {
+
+            adj.get(arr[0]).remove(adj.get(arr[0]).indexOf(arr[1]));
+            adj.get(arr[1]).remove(adj.get(arr[1]).indexOf(arr[0]));
+
+        }
+    }
+
 }
