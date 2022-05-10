@@ -93,4 +93,59 @@ public class GraphReader {
 
     }
 
+    public static void createGraph(File p_map, ArrayList<ArrayList<Integer>> adj) {
+        try {
+            Scanner mapReader = new Scanner(p_map);
+            covid_ward = new ArrayList<>();
+            while (mapReader.hasNextLine()) {
+                String l_line = mapReader.nextLine();
+                int nodeIndex = l_line.indexOf('[') + 1;
+                int nodeEndIndex = l_line.indexOf(']');
+
+
+                int edgeStartIndex = l_line.indexOf('{') + 1;
+                int edgeEndIndex = l_line.indexOf('}');
+                try {
+                    int u = Integer.parseInt(l_line.substring(nodeIndex, nodeEndIndex));
+                    String numberEd = l_line.substring(edgeStartIndex, edgeEndIndex);
+                    String[] ch = numberEd.split(",");
+                    for (String c : ch) {
+                        try {
+                            int v = Integer.parseInt(c);
+                            if (!adj.get(u).contains(v))
+                                adj.get(u).add(v);
+                            if (!adj.get(v).contains(u))
+                                adj.get(v).add(u);
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                    adj.remove(adj.size() - 1);
+                    String numberEd = l_line.substring(edgeStartIndex, edgeEndIndex);
+                    String[] ch = numberEd.split(",");
+                    for (String c : ch) {
+                        try {
+                            int v = Integer.parseInt(c);
+                            covid_ward.add(v);
+                        } catch (Exception ei) {
+
+                        }
+                    }
+                    covid_ward_index=covid_ward.get(0);
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+
+    }
+
+
 }
