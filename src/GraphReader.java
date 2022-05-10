@@ -72,4 +72,25 @@ public class GraphReader {
         }
     }
 
+    public static void intializeGrpah(File p_map, ArrayList<ArrayList<Integer>> adj) {
+
+        try {
+            Scanner mapReader = new Scanner(p_map);
+
+            while (mapReader.hasNextLine()) {
+                String l_line = mapReader.nextLine();
+                adj.add(new ArrayList<>());
+            }
+            System.out.println("Loaded graph successfully");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found please run again with a valid file name");
+            System.exit(0);
+
+
+        }
+
+
+    }
+
 }
