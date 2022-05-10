@@ -63,4 +63,13 @@ public class GraphReader {
         return graph;
     }
 
+    public static void addEdges(ArrayList<ArrayList<Integer>> adj, ArrayList<int[]> feasible_labellings_for_covid) {
+        for (int[] arr : feasible_labellings_for_covid) {
+            if (!adj.get(arr[0]).contains(arr[1]))
+                adj.get(arr[0]).add(arr[1]);
+            if (!adj.get(arr[1]).contains(arr[0]))
+                adj.get(arr[1]).add(arr[0]);
+        }
+    }
+
 }
