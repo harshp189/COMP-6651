@@ -147,5 +147,23 @@ public class GraphReader {
 
     }
 
+    public static ArrayList<ArrayList<Integer>> getGraph() {
+        String filePath = "./src/GraphInput/";
+        System.out.println("Enter complete file name ");
+        Scanner scan = new Scanner(System.in);
+        String fileName = scan.next();
+
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
+        File p_map = new File(filePath + fileName);
+        intializeGrpah(p_map, adj);
+        createGraph(p_map, adj);
+
+        return adj;
+
+
+    }
+
+
 
 }
