@@ -46,4 +46,21 @@ public class GraphReader {
         }
     }
 
+    public static int getCovidWard(){
+        return covid_ward_index;
+    }
+
+    public static ArrayList<ArrayList<Integer>> removeEmptyVertices(ArrayList<ArrayList<Integer>> adj)
+    {
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for(ArrayList<Integer> arr : adj)
+        {
+            if(arr.size() != 0)
+            {
+                graph.add(arr);
+            }
+        }
+        return graph;
+    }
+
 }
