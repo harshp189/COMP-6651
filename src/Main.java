@@ -108,4 +108,47 @@ public class Main {
         }
     }
 
+
+    public static void main(String[] args) {
+
+        ArrayList<ArrayList<Integer>> hospital_graph = GraphReader.getGraph();
+
+        int N = hospital_graph.size();
+
+
+        feasible_labellings = new ArrayList<>();
+
+
+        int covid_ward_vertex = GraphReader.getCovidWard();
+
+        if(covid_ward_vertex == -1) {
+            System.out.println("---------------PATH-------------------\n");
+            checkFeasibleLabellings(hospital_graph, N);
+            orientation(hospital_graph, N);
+        }else {
+            ArrayList<int[]> path_1 = BFS.findShortestPath(hospital_graph, 0, covid_ward_vertex, N);
+            GraphReader.removeEdges(hospital_graph, path_1);
+
+            ArrayList<int[]> path_2 = BFS.findShortestPath(hospital_graph, covid_ward_vertex, 0, N);
+            GraphReader.removeEdges(hospital_graph, path_2);
+
+            ArrayList<int[]> path_3 = BFS.findShortestPath(hospital_graph, covid_ward_vertex, 0, N);
+            GraphReader.removeEdges(hospital_graph, path_3);
+
+            GraphReader.addEdges(hospital_graph, path_2);
+
+            System.out.println("---------------COVID PATH-------------------\n");
+            printPath(path_1);
+            printPath(path_3);
+
+
+            System.out.println("\n\n---------------NON-COVID PATH-------------------\n");
+            checkFeasibleLabellings(hospital_graph, N);
+            orientation(hospital_graph, N);
+        }
+
+
+    }
+
+
 }
