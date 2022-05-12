@@ -101,4 +101,11 @@ public class Main {
 
     }
 
+    public static  void printPath(ArrayList<int []> path)
+    {
+        for (int[] arr : path) {
+            System.out.println(arr[0] + "->" + arr[1]);
+        }
+    }
+
 }
