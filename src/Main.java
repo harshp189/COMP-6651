@@ -53,4 +53,31 @@ public class Main {
 
     }
 
+    static void dfsCheckFeasibleLabellings(ArrayList<ArrayList<Integer>> G, int parentofV, int v) {
+
+        visited[v] = counter++;  //identify each vertex with a different number according to its position in the dfs tree
+        low[v] = visited[v];     //check for loop, identifies the lowest numbered (from visited array) vertex that the current vertex can reach.
+
+
+        for (int w : G.get(v)) {
+
+            if (visited[w] == -1) {
+                dfsCheckFeasibleLabellings(G, v, w);
+
+                //Check if descendants of v has connections to ancestors of v
+                low[v] = Math.min(low[v], low[w]);
+
+                //If lowest vertex reachable from descendants of v is below w, v-w is a bridge
+                // if(low[w] > visited[v]
+                if (low[w] == visited[w]) {
+                    bridgeFound = true;
+                }
+            }
+
+            // if w is not a parent of V and it has already been visited
+            else if (w != parentofV)
+                low[v] = Math.min(low[v], visited[w]);
+        }
+    }
+
 }
