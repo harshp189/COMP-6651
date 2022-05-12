@@ -80,4 +80,25 @@ public class Main {
         }
     }
 
+    /*
+     *  Identifies bridge edges and prints them out. This decomposes
+     *  a directed graph into two-edge connected components.
+     *  Runs in O(E + V) time.
+     */
+    static void checkFeasibleLabellings(ArrayList<ArrayList<Integer>> hospital_graph, int N)
+    {
+        low = new int[N];
+        visited = new int[N];
+
+        for(int i = 0 ; i < N ; i++) {
+            low[i] = -1;
+            visited[i] = -1;
+        }
+
+        for (int i = 0; i < N; i++)
+            if (visited[i] == -1)
+                dfsCheckFeasibleLabellings(hospital_graph, i, i);
+
+    }
+
 }
