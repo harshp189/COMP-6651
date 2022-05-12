@@ -36,4 +36,21 @@ public class Main {
 
     }
 
+    /*
+     *  Function to print the direction of edges to make graph SCCs
+     *  Runs in O(E + V) time.
+     */
+    static void orientation(ArrayList<ArrayList<Integer>> hospital_graph, int n) {
+
+        int[] order = new int[n];
+        boolean[] mark = new boolean[n];
+
+        dfsOrientation(hospital_graph, order, mark, 1, 0);
+
+        for (int[] edge : feasible_labellings) {
+            System.out.println(edge[0] + "->" + edge[1]);
+        }
+
+    }
+
 }
